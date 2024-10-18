@@ -1,4 +1,13 @@
 {
+  // "compilerOptions": {
+  //   "target": "esnext", // or your preferred target
+  //   "module": "esnext", // or your preferred module system
+  //   "baseUrl": "src",
+  //   "paths": {
+  //     "@type/*": ["@type/*"] // Alias for the @type directory
+  //   },
+  //   "types": ["node"]
+  // },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
