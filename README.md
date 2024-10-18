@@ -1,30 +1,36 @@
 ### Login/Logout Flow
 
 #### 1. **Login Flow**
-   - [ ] **Login Form**: Users input their credentials (e.g., username, password).
-   - [ ] **Submit Form**: Credentials are submitted to the backend server for validation.
-   - [ ] **Token Handling**: On successful authentication, store the received token (e.g., JWT) in `localStorage` or `sessionStorage` to persist the session.
-   - [ ] **Protect Routes**: Restrict access to certain routes based on the user's authentication status using token verification.
+
+- [ ] **Login Form**: Users input their credentials (e.g., username, password).
+- [ ] **Submit Form**: Credentials are submitted to the backend server for validation.
+- [ ] **Token Handling**: On successful authentication, store the received token (e.g., JWT) in `localStorage` or `sessionStorage` to persist the session.
+- [ ] **Protect Routes**: Restrict access to certain routes based on the user's authentication status using token verification.
 
 #### 2. **Logout Flow**
-   - [ ] **Trigger Logout**: Provide a button or action to log the user out.
-   - [ ] **Clear State**: Remove the stored token from `localStorage/sessionStorage` and reset the authentication state.
+
+- [ ] **Trigger Logout**: Provide a button or action to log the user out.
+- [ ] **Clear State**: Remove the stored token from `localStorage/sessionStorage` and reset the authentication state.
 
 #### 3. **Backend Validation**
-   - Ensure all protected routes on the backend validate the token to authenticate the user for every request.
+
+- Ensure all protected routes on the backend validate the token to authenticate the user for every request.
 
 #### 4. **Auto-login and Token Expiry**
-   - On app initialization, check for a valid token and update the authentication state if the user is still authenticated.
-   - Handle token expiration by prompting the user to log in again or refreshing the token if applicable.
+
+- On app initialization, check for a valid token and update the authentication state if the user is still authenticated.
+- Handle token expiration by prompting the user to log in again or refreshing the token if applicable.
 
 #### 5. **Error Handling**
-   - Display appropriate error messages for failed logins, token validation issues, and network errors.
-   - Automatically log the user out or refresh the token upon session expiry.
+
+- Display appropriate error messages for failed logins, token validation issues, and network errors.
+- Automatically log the user out or refresh the token upon session expiry.
 
 #### 6. **Components and Pages**
-   - [ ] **Login Page**: Contains the login form and manages user authentication.
-   - [ ] **Protected Routes**: Routes that are only accessible if the user is authenticated. Implement route guards to ensure protection.
-   - [ ] **Logout Button**: Typically displayed on the header or user dashboard to allow users to log out easily.
+
+- [ ] **Login Page**: Contains the login form and manages user authentication.
+- [ ] **Protected Routes**: Routes that are only accessible if the user is authenticated. Implement route guards to ensure protection.
+- [ ] **Logout Button**: Typically displayed on the header or user dashboard to allow users to log out easily.
 
 ## About project
 
@@ -79,25 +85,28 @@ auth-manager/
 ### Dependency
 
 Axios (for API requests):
-   * Use Axios for making HTTP requests to your backend API for login, logout, and token validation.
-   
-   ```npm install axios```
+
+- Use Axios for making HTTP requests to your backend API for login, logout, and token validation.
+
+`npm install axios`
 
 JWT Decode (for decoding and managing JSON Web Tokens):
-  * Useful for extracting information from JWT tokens (e.g., checking token expiry).
-   
-   ```npm install jwt-decode```
+
+- Useful for extracting information from JWT tokens (e.g., checking token expiry).
+
+`npm install jwt-decode`
 
 React Hook Form (for handling forms like login forms):
-   * React Hook Form simplifies form state management and validation.
 
-   ```npm install react-hook-form```
+- React Hook Form simplifies form state management and validation.
 
+`npm install react-hook-form`
 
 React Router (for handling navigation and protecting routes):
-   * You'll need React Router to set up routing, including protected routes that require authentication.
 
-   ```npm install react-router-dom```
+- You'll need React Router to set up routing, including protected routes that require authentication.
+
+`npm install react-router-dom`
 
 ### Consider Redux
 
@@ -114,3 +123,32 @@ store/
 └── middlewares/                 # Custom middlewares for state management (Redux)
 ```
 
+### How to use ui-lib
+
+```
+npm config set @hunterkilltree:registry https://npm.pkg.github.com
+npm config set //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+```
+
+```
+npm install @hunterkilltree/ui-lib@0.0.2
+
+```
+
+- Add code
+
+```
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@hunterkilltree/ui-lib/dist/ui-lib.js",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+```
