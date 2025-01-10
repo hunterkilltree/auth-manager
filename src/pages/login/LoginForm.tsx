@@ -2,7 +2,7 @@ import { useState } from "react";
 import { User } from "../../@type/user";
 import LocalStorageHelper from "../../utils/helpers/LocalStorageHelper";
 import ConstantHelper from "../../utils/constants/ConstantHelper";
-import { Button, TextInput } from "@hunterkilltree/ui-lib";
+import { Button, TextInput, FloatingLabel } from "@hunterkilltree/ui-lib";
 import { useNavigate } from "react-router-dom";
 import RouteConstant from "../../utils/constants/RouteConstant";
 
@@ -62,21 +62,19 @@ function LoginForm() {
     <div className="flex h-screen justify-center gap-4">
       <div className="flex w-60 flex-col gap-4">
         <h3>Calculate Net Salary</h3>
-        <TextInput
-          id="salary" // Match the id to the User property
-          type="salary"
-          placeholder="Your salary"
+        <FloatingLabel
+          color="default"
+          label="Salary"
           sizing="sm"
-          required
+          variant="outlined"
           value={salary} // Bind the input value to the state
           onChange={handleChangeSalary} // Update state on change
         />
-        <TextInput
-          id="tax" // Match the id to the User property
-          type="tax"
-          placeholder="Your tax"
+        <FloatingLabel
+          color="default"
+          label="Tax"
           sizing="sm"
-          required
+          variant="outlined"
           value={tax} // Bind the input value to the state
           onChange={handleChangeTax} // Update state on change
         />
@@ -89,7 +87,7 @@ function LoginForm() {
           id="email" // Match the id to the User property
           type="email"
           placeholder="name@email.com"
-          sizing="sm"
+          sizing="md"
           required
           value={user.email} // Bind the input value to the state
           onChange={handleChange} // Update state on change
@@ -98,7 +96,7 @@ function LoginForm() {
           id="password" // Match the id to the User property
           type="password"
           placeholder="password"
-          sizing="sm"
+          sizing="md"
           required
           value={user.password} // Bind the input value to the state
           onChange={handleChange} // Update state on change
