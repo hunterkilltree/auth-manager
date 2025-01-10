@@ -14,6 +14,10 @@ function LoginForm() {
     password: "",
   });
 
+  const [salary, setSalary] = useState<number>(0);
+  const [tax, setTax] = useState<number>(0);
+  const [netSalary, setNetSalary] = useState<number>(0);
+
   // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -21,6 +25,21 @@ function LoginForm() {
       ...prevUser,
       [id]: value, // Update the respective field based on the input id
     }));
+  };
+
+  const handleChangeSalary = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSalary(Number(value));
+  };
+
+  const handleChangeTax = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setTax(Number(value));
+  };
+
+  const handleCalculateNetSalary = () => {
+    const netSalary = salary - (salary * tax) / 100;
+    setNetSalary(netSalary);
   };
 
   // Handle form submission
@@ -40,8 +59,32 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex h-screen justify-center gap-4">
+      <div className="flex w-60 flex-col gap-4">
+        <h3>Calculate Net Salary</h3>
+        <TextInput
+          id="salary" // Match the id to the User property
+          type="salary"
+          placeholder="Your salary"
+          sizing="sm"
+          required
+          value={salary} // Bind the input value to the state
+          onChange={handleChangeSalary} // Update state on change
+        />
+        <TextInput
+          id="tax" // Match the id to the User property
+          type="tax"
+          placeholder="Your tax"
+          sizing="sm"
+          required
+          value={tax} // Bind the input value to the state
+          onChange={handleChangeTax} // Update state on change
+        />
+        <Button onClick={handleCalculateNetSalary}>Calculate</Button>
+        <p>Net Salary: {netSalary}</p>
+      </div>
       <form className="flex w-60 flex-col gap-4" onSubmit={handleSubmit}>
+        <h3>Login Form</h3>
         <TextInput
           id="email" // Match the id to the User property
           type="email"
