@@ -19,9 +19,13 @@ function LoginForm() {
     password: "",
   });
 
-  const [salary, setSalary] = useState<number>(0);
-  const [tax, setTax] = useState<number>(0);
-  const [netSalary, setNetSalary] = useState<number>(0);
+  const [salary, setSalary] = useState<string>("");
+  const [tax, setTax] = useState<string>("");
+  const [netSalary, setNetSalary] = useState<string>("");
+
+  // const [salary, setSalary] = useState<number>(0);
+  // const [tax, setTax] = useState<number>(0);
+  // const [netSalary, setNetSalary] = useState<number>(0);
 
   // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,18 +38,22 @@ function LoginForm() {
 
   const handleChangeSalary = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const numericValue = Number(value);
-    setSalary(isNaN(numericValue) ? 0 : numericValue);
+    setSalary(value);
   };
 
   const handleChangeTax = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const numericValue = Number(value);
-    setTax(isNaN(numericValue) ? 0 : numericValue);
+    setTax(value);
   };
 
   const handleCalculateNetSalary = () => {
-    const netSalary = salary - (salary * tax) / 100;
+    const numericSalary = Number(salary) || 0;
+    const numericTax = Number(tax) || 0;
+
+    const netSalary = (
+      numericSalary -
+      (numericSalary * numericTax) / 100
+    ).toFixed(2); // Convert to string with 2 decimal places
     setNetSalary(netSalary);
   };
 
@@ -65,8 +73,15 @@ function LoginForm() {
     navigate(RouteConstant.PROFILE);
   };
 
-  const NetSalaryForm = () => {
-    return (
+  return (
+    <div className="flex h-screen justify-center gap-4">
+      <Datepicker
+        autoHide
+        language="en"
+        showClearButton
+        showTodayButton
+        theme={{}}
+      />
       <div className="flex w-60 flex-col gap-4">
         <h3>Calculate Net Salary</h3>
         <FloatingLabel
@@ -87,20 +102,13 @@ function LoginForm() {
         />
         <Button onClick={handleCalculateNetSalary}>Calculate</Button>
         <p>Net Salary: {netSalary}</p>
-      </div>
-    );
-  };
 
-  return (
-    <div className="flex h-screen justify-center gap-4">
-      <Datepicker
-        autoHide
-        language="en"
-        showClearButton
-        showTodayButton
-        theme={{}}
-      />
-      <NetSalaryForm />
+        <h3>Calculate profile rate (%)</h3>
+        <p> TODO</p>
+
+        <h3>Calculate earn profit from bank</h3>
+        <p> TODO</p>
+      </div>
       <form className="flex w-60 flex-col gap-4" onSubmit={handleSubmit}>
         <h3>Login Form</h3>
         <TextInput
@@ -108,7 +116,7 @@ function LoginForm() {
           type="email"
           placeholder="name@email.com"
           sizing="md"
-          required
+          variant="outlined"
           value={user.email} // Bind the input value to the state
           onChange={handleChange} // Update state on change
         />
