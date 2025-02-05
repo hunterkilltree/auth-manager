@@ -135,6 +135,8 @@ npm install @hunterkilltree/ui-lib@0.0.2
 
 ```
 
+### Replace token github to var in .npmrc file
+
 - Add code
 
 ```

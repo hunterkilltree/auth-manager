@@ -2,7 +2,12 @@ import { useState } from "react";
 import { User } from "../../@type/user";
 import LocalStorageHelper from "../../utils/helpers/LocalStorageHelper";
 import ConstantHelper from "../../utils/constants/ConstantHelper";
-import { Button, TextInput, FloatingLabel } from "@hunterkilltree/ui-lib";
+import {
+  Button,
+  TextInput,
+  FloatingLabel,
+  Datepicker,
+} from "@hunterkilltree/ui-lib";
 import { useNavigate } from "react-router-dom";
 import RouteConstant from "../../utils/constants/RouteConstant";
 
@@ -29,12 +34,14 @@ function LoginForm() {
 
   const handleChangeSalary = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setSalary(Number(value));
+    const numericValue = Number(value);
+    setSalary(isNaN(numericValue) ? 0 : numericValue);
   };
 
   const handleChangeTax = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setTax(Number(value));
+    const numericValue = Number(value);
+    setTax(isNaN(numericValue) ? 0 : numericValue);
   };
 
   const handleCalculateNetSalary = () => {
@@ -58,8 +65,8 @@ function LoginForm() {
     navigate(RouteConstant.PROFILE);
   };
 
-  return (
-    <div className="flex h-screen justify-center gap-4">
+  const NetSalaryForm = () => {
+    return (
       <div className="flex w-60 flex-col gap-4">
         <h3>Calculate Net Salary</h3>
         <FloatingLabel
@@ -81,6 +88,19 @@ function LoginForm() {
         <Button onClick={handleCalculateNetSalary}>Calculate</Button>
         <p>Net Salary: {netSalary}</p>
       </div>
+    );
+  };
+
+  return (
+    <div className="flex h-screen justify-center gap-4">
+      <Datepicker
+        autoHide
+        language="en"
+        showClearButton
+        showTodayButton
+        theme={{}}
+      />
+      <NetSalaryForm />
       <form className="flex w-60 flex-col gap-4" onSubmit={handleSubmit}>
         <h3>Login Form</h3>
         <TextInput
