@@ -116,7 +116,6 @@ function LoginForm() {
           type="email"
           placeholder="name@email.com"
           sizing="md"
-          variant="outlined"
           value={user.email} // Bind the input value to the state
           onChange={handleChange} // Update state on change
         />
